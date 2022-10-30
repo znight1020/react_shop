@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { useDispatch } from "react-redux";
 import { registerUser } from "../../../_actions/user_action";
-import { useNavigate } from "react-router-dom"; // react-router-dom v6부터 useHistory에서 useNavigate로 바뀜
+import { Navigate, useNavigate } from "react-router-dom"; // react-router-dom v6부터 useHistory에서 useNavigate로 바뀜
 import { Formik } from "formik";
 import * as Yup from "yup";
 import { Form, Input, Button } from "antd";
@@ -74,7 +74,7 @@ function RegisterPage(props) {
 
           dispatch(registerUser(dataToSubmit)).then((response) => {
             if (response.payload.success) {
-              props.history.push("/login");
+              navigate("/login");
             } else {
               alert(response.payload.err.errmsg);
             }
