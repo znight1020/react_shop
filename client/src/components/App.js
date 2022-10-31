@@ -8,6 +8,8 @@ import NavBar from "./views/NavBar/NavBar";
 import Footer from "./views/Footer/Footer";
 import "antd/dist/antd.min.css";
 
+import "./styles.css";
+
 import Auth from "../hoc/auth";
 
 const AuthLandingPage = Auth(LandingPage, null);
@@ -39,8 +41,8 @@ function App() {
                         />
                     </Routes>
                 </div>
+                <Footer />
             </Router>
-            <Footer />
         </Suspense>
     );
 }

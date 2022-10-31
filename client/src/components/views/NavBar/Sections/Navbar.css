@@ -1,7 +1,5 @@
-@import "~antd/dist/antd.min.css";
-
 .menu {
-    padding: 0 10px;
+    padding: 0 20px;
     border-bottom: solid 1px #e8e8e8;
     overflow: auto;
     box-shadow: 0 0 30px #f3f1f1;
@@ -19,8 +17,13 @@
     padding: 15px 20px;
 }
 
+.menu__container {
+    width: calc(100% - 150px);
+    float: left;
+}
+
 .menu__container .ant-menu-item {
-    padding: 0px 5px;
+    padding: 0px 10px;
 }
 
 .menu__container .ant-menu-submenu-title {
@@ -29,7 +32,7 @@
 
 .menu__container .ant-menu-item a,
 .menu__container .ant-menu-submenu-title a {
-    padding: 10px 20px;
+    padding: 10px 15px;
 }
 
 .menu__container .ant-menu-horizontal {
@@ -42,6 +45,28 @@
 
 .menu__container .menu_rigth {
     float: right;
+}
+
+.barsBtn {
+    display: block;
+    width: 20px;
+    height: 6px;
+    background: #1890ff;
+    position: relative;
+}
+.barsBtn:after,
+.barsBtn:before {
+    content: attr(x);
+    width: 20px;
+    position: relative;
+    top: -6px;
+    left: 0;
+    height: 2px;
+    background: #1890ff;
+}
+.barsBtn:after {
+    top: auto;
+    bottom: -6px;
 }
 
 .menu__mobile-button {
