@@ -4,14 +4,19 @@ import axios from "axios";
 import { USER_SERVER } from "../../../Config";
 import { useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
-import { CheckCircleOutlined, SettingOutlined } from "@ant-design/icons";
+import {
+    SettingOutlined,
+    UploadOutlined,
+    LoginOutlined,
+    LogoutOutlined,
+} from "@ant-design/icons";
 import "antd/dist/antd.min.css";
 
 const items = [
     {
         label: <a href="/login">Signin</a>,
         key: "mail",
-        icon: <CheckCircleOutlined />,
+        icon: <LoginOutlined />,
     },
     {
         label: <a href="/register">Signup</a>,
@@ -20,13 +25,18 @@ const items = [
     },
 ];
 
-const logInItems = [
-    { label: <a href="/product/upload">upload</a>, key: "upload" },
-    {
-        label: <a href="/">logout</a>,
-        key: "logout",
-    },
-];
+// const logInItem1 = [
+//     {
+//         label: <a href="/product/upload">Upload</a>,
+//         key: "upload",
+//         icon: <UploadOutlined />,
+//     },
+//     {
+//         label: <a href="/login">Logout</a>,
+//         key: "logout",
+//         icon: <LogoutOutlined />,
+//     },
+// ];
 
 function RightMenu(props) {
     const user = useSelector((state) => state.user);
@@ -45,11 +55,20 @@ function RightMenu(props) {
         return <Menu mode="horizontal" items={items} />;
     } else {
         return (
-            <Menu
-                mode="horizontal"
-                items={logInItems}
-                onClick={logoutHandler}
-            />
+            <Menu mode={props.mode}>
+                <Menu.Item key="upload">
+                    <a href="/product/upload">
+                        <UploadOutlined />
+                        Upload
+                    </a>
+                </Menu.Item>
+                <Menu.Item key="logout">
+                    <a onClick={logoutHandler}>
+                        <LogoutOutlined />
+                        Logout
+                    </a>
+                </Menu.Item>
+            </Menu>
         );
     }
 }

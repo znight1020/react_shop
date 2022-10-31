@@ -18,6 +18,7 @@ function LandingPage(props) {
         axios.get("/api/users/logout").then((response) => {
             if (response.data.success) {
                 navigate("/login");
+                console.log("로그아웃 성공");
             } else {
                 alert("Failed to logout!");
             }

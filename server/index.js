@@ -60,23 +60,23 @@ app.post("/api/users/login", (req, res) => {
                     loginSuccess: false,
                     message: "비밀번호가 틀렸습니다.",
                 });
+
+            user.generateToken((err, user) => {
+                if (err) return res.status(400).send(err); // 400은 실패했다는 뜻
+
+                // 토큰을 저장한다. 어디에 ?  쿠기, 로컬스토리지 등등 저장할 곳은 많음,
+                // 어디가 가장 안전한가? 논란이 많다, 각자 다 장단점이 있음
+
+                //쿠키에 저장해보자
+                res.cookie("x_auth", user.token)
+                    .status(200) // 200은 성공했다는 뜻
+                    .json({ loginSuccess: true, userId: user._id });
+            });
         });
 
         // 비밀번호까지 맞다면 토큰을 생성해준다. 토큰생성을 위해 JSONWEBTOKEN 라이브러리를 다운받아야 함
-        user.generateToken((err, user) => {
-            if (err) return res.status(400).send(err); // 400은 실패했다는 뜻
-
-            // 토큰을 저장한다. 어디에 ?  쿠기, 로컬스토리지 등등 저장할 곳은 많음,
-            // 어디가 가장 안전한가? 논란이 많다, 각자 다 장단점이 있음
-
-            //쿠키에 저장해보자
-            res.cookie("x_auth", user.token)
-                .status(200) // 200은 성공했다는 뜻
-                .json({ loginSuccess: true, userId: user._id });
-        });
     });
 });
-
 // role 0 = 일반유저, 0이 아니면 관리자
 
 //auth는 미들웨어 = '/api/users/auth' 와 (req,res) 중간에서 무언가를 해주는 역할
@@ -96,12 +96,16 @@ app.get("/api/users/auth", auth, (req, res) => {
 
 app.get("/api/users/logout", auth, (req, res) => {
     // 로그아웃 기능
-    User.findOneAndUpdate({ _id: req.user._id }, { token: "" }, (err, user) => {
-        if (err) return res.json({ success: false, err });
-        return res.status(200).send({
-            success: true,
-        });
-    });
+    User.findOneAndUpdate(
+        { _id: req.user._id },
+        { token: "", tokenExp: "" },
+        (err, user) => {
+            if (err) return res.json({ success: false, err });
+            return res.status(200).send({
+                success: true,
+            });
+        }
+    );
 });
 
 app.listen(port, () => {

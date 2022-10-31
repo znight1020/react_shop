@@ -3,10 +3,8 @@ import { HomeOutlined, AppstoreOutlined } from "@ant-design/icons";
 import { Menu } from "antd";
 import "antd/dist/antd.min.css";
 
-const item1 = [
+const items = [
     { label: <a href="/">Home</a>, key: "home", icon: <HomeOutlined /> },
-];
-const item2 = [
     {
         label: <a href="/blog">Blogs</a>,
         key: "app",
@@ -15,6 +13,6 @@ const item2 = [
 ];
 
 function LeftMenu(props) {
-    return <Menu mode="horizontal" items={(item1, item2)} />;
+    return <Menu mode="horizontal" items={items} />;
 }
 export default LeftMenu;

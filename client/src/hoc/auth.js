@@ -15,10 +15,10 @@ export default function (SpecificComponent, option, adminRoute = null) {
         const dispatch = useDispatch();
 
         useEffect(() => {
-            dispatch(auth()).then((response) => {
+            dispatch(auth()).then(async (response) => {
                 //로그인 하지 않은 상태
                 if (!response.payload.isAuth) {
-                    if (option) {
+                    if (option === true) {
                         navigate("/login");
                     }
                 }
@@ -28,8 +28,8 @@ export default function (SpecificComponent, option, adminRoute = null) {
                         navigate("/");
                     } else {
                         if (option === false) {
+                            navigate("/");
                         }
-                        navigate("/");
                     }
                 }
             });
