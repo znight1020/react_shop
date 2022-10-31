@@ -58,7 +58,7 @@ function UploadProductPage() {
 
                 <br />
                 <br />
-                <label>가격</label>
+                <label>가격(₩)</label>
                 <Input
                     type="number"
                     onChange={priceChangeHandler}
