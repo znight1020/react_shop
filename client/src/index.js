@@ -29,9 +29,7 @@ root.render(
                 window.__REDUX_DEVTOOLS_EXTENSION__()
         )}
     >
-        <React.StrictMode>
-            <App />
-        </React.StrictMode>
+        <App />
     </Provider>
 );
 
