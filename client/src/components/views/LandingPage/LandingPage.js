@@ -6,38 +6,16 @@ import "antd/dist/antd.min.css";
 // 우리는 back과 front 둘 다 control 가능하기 때문에 proxy를 사용할거임!
 function LandingPage(props) {
     useEffect(() => {
-        // axios
-        //     .get("/api/hello") // getRequest를 서버에 보냄 endpoint = /api/hello
-        //     .then((response) => console.log(response)); // 서버에서 돌아오는 response를 console창에 보여줘라!
+        let body = {};
+        axios.post("api/product/products").then((response) => {
+            if (response.data.success) {
+                console.log(response.data);
+            } else {
+                alert("상품들을 가져오는데 실패했습니다.");
+            }
+        });
     }, []);
-    const navigate = useNavigate();
-
-    // const onClickHandler = () => {
-    //     axios.get("/api/users/logout").then((response) => {
-    //         if (response.data.success) {
-    //             navigate("/login");
-    //             console.log("로그아웃 성공");
-    //         } else {
-    //             alert("Failed to logout!");
-    //         }
-    //     });
-    // };
-
-    return (
-        <div
-            style={{
-                display: "flex",
-                justifyContent: "center",
-                alignItems: "center",
-                width: "100%",
-                height: "100vh",
-            }}
-        >
-            <h2>시작 페이지</h2>
-
-            {/* <button onClick={onClickHandler}>로그아웃</button> */}
-        </div>
-    );
+    return <div>Landing Page</div>;
 }
 
 export default LandingPage;
