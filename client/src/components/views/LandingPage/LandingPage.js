@@ -4,6 +4,7 @@ import "antd/dist/antd.min.css";
 import { Col, Card, Row } from "antd";
 import { ShopOutlined } from "@ant-design/icons";
 import Meta from "antd/lib/card/Meta";
+import ImageSlider from "../../utils/ImageSlider";
 
 // 두개의 다른 포트를 가지고 있는 서버는 아무 설정없이 request를 보낼 수 없다. why? Cors(Cross - Origin - Resources Sharing) 보안정책때문에
 // 우리는 back과 front 둘 다 control 가능하기 때문에 proxy를 사용할거임!
@@ -26,15 +27,7 @@ function LandingPage(props) {
     const renderCards = Products.map((product, index) => {
         return (
             <Col lg={6} md={8} xs={24} key={index}>
-                <Card
-                    cover={
-                        <img
-                            style={{ width: "100%", maxHeight: "150px" }}
-                            src={`http://localhost:5000/${product.images[0]}`}
-                            alt="profile"
-                        />
-                    }
-                >
+                <Card cover={<ImageSlider images={product.images} />}>
                     <Meta
                         title={product.title}
                         description={`${product.price}`}
