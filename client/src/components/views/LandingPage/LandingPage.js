@@ -10,10 +10,15 @@ import ImageSlider from "../../utils/ImageSlider";
 // 우리는 back과 front 둘 다 control 가능하기 때문에 proxy를 사용할거임!
 function LandingPage(props) {
     const [Products, setProducts] = useState([]);
+    const [Skip, setSkip] = useState(0);
+    const [Limit, setLimit] = useState(8);
 
     useEffect(() => {
-        let body = {};
-        axios.post("api/product/products").then((response) => {
+        let body = {
+            skip: Skip,
+            limit: Limit,
+        };
+        axios.post("api/product/products", body).then((response) => {
             if (response.data.success) {
                 console.log(response.data);
 
@@ -23,6 +28,8 @@ function LandingPage(props) {
             }
         });
     }, []);
+
+    const loadMoreHandler = () => {};
 
     const renderCards = Products.map((product, index) => {
         return (
@@ -36,6 +43,7 @@ function LandingPage(props) {
             </Col>
         );
     });
+
     return (
         <div style={{ width: "75%", margin: "3rem auto" }}>
             <div style={{ textAlign: "center" }}>
@@ -51,7 +59,7 @@ function LandingPage(props) {
             <Row gutter={[16, 16]}>{renderCards}</Row>
 
             <div style={{ display: "flex", justifyContent: "center" }}>
-                <button>더보기</button>
+                <button onClick={loadMoreHandler}>더보기</button>
             </div>
         </div>
     );
