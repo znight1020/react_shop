@@ -51,19 +51,26 @@ router.post("/products", (req, res) => {
     let limit = req.body.limit ? parseInt(req.body.limit) : 20; // parseInt는 req.body.limit이 String일 경우에 대비해
     let skip = req.body.skip ? parseInt(req.body.skip) : 0;
 
-    Product.find()
+    let findArgs = {};
+
+    for (let key in req.body.filters) {
+        if (req.body.filters[key].length > 0) {
+            findArgs[key] = req.body.filters[key];
+        } // key는 categories or price가 된다.
+    }
+    console.log("findArgs", findArgs);
+
+    Product.find(findArgs) // findArgs가 뭔가? findArgs로 설정된 categories = n,n,n,n만 찾아서 가져와라
         .populate("writer")
         .skip(skip)
         .limit(limit)
         .exec((err, productInfo) => {
             if (err) return res.status(400).json({ success: false, err });
-            return res
-                .status(200)
-                .json({
-                    success: true,
-                    productInfo,
-                    postSize: productInfo.length,
-                });
+            return res.status(200).json({
+                success: true,
+                productInfo,
+                postSize: productInfo.length,
+            });
         });
 });
 

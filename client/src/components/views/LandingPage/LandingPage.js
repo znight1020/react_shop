@@ -5,6 +5,8 @@ import { Col, Card, Row } from "antd";
 import { ShopOutlined } from "@ant-design/icons";
 import Meta from "antd/lib/card/Meta";
 import ImageSlider from "../../utils/ImageSlider";
+import CheckBox from "./Sections/CheckBox";
+import { categories } from "./Sections/Data";
 
 // 두개의 다른 포트를 가지고 있는 서버는 아무 설정없이 request를 보낼 수 없다. why? Cors(Cross - Origin - Resources Sharing) 보안정책때문에
 // 우리는 back과 front 둘 다 control 가능하기 때문에 proxy를 사용할거임!
@@ -13,14 +15,17 @@ function LandingPage(props) {
     const [Skip, setSkip] = useState(0); // eslint-disable-line no-unused-vars
     const [Limit, setLimit] = useState(8); // eslint-disable-line no-unused-vars
     const [PostSize, setPostSize] = useState(0);
-
+    const [Filters, setFilters] = useState({
+        categories: [],
+        price: [],
+    });
     useEffect(() => {
         let body = {
             skip: Skip, // 더보기 버튼을 누를 시 Skip만 달리 해서 다음 상품들을 볼 수 있게 할 수 있다.
             limit: Limit,
         };
         getProducts(body);
-    }, [getProducts, Skip, Limit]);
+    }, [Skip, Limit]);
 
     const getProducts = (body) => {
         axios.post("api/product/products", body).then((response) => {
@@ -63,6 +68,25 @@ function LandingPage(props) {
         );
     });
 
+    const showFilterdResults = (filters) => {
+        let body = {
+            skip: 0,
+            limit: Limit,
+            filters: filters,
+        };
+        getProducts(body);
+        setSkip(0);
+    };
+
+    const handleFilters = (filters, category) => {
+        // CheckBox의 id가 filter에 담겨있다.
+        const newFilters = { ...Filters };
+
+        newFilters[category] = filters;
+
+        showFilterdResults(newFilters);
+    };
+
     return (
         <div style={{ width: "75%", margin: "3rem auto" }}>
             <div style={{ textAlign: "center" }}>
@@ -71,6 +95,14 @@ function LandingPage(props) {
                 </h2>
             </div>
             {/* Filter */}
+            {/* CheckBox */}
+            <CheckBox
+                list={categories}
+                handleFilters={(filters) =>
+                    handleFilters(filters, "categories")
+                }
+            />
+            {/* RadioBox */}
 
             {/* Search */}
 
