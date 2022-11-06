@@ -5,14 +5,15 @@ import { Col, Card, Row } from "antd";
 import { ShopOutlined } from "@ant-design/icons";
 import Meta from "antd/lib/card/Meta";
 import ImageSlider from "../../utils/ImageSlider";
+import RadioBox from "./Sections/RadioBox";
 import CheckBox from "./Sections/CheckBox";
-import { categories } from "./Sections/Data";
+import { categories, price } from "./Sections/Datas";
 
 // 두개의 다른 포트를 가지고 있는 서버는 아무 설정없이 request를 보낼 수 없다. why? Cors(Cross - Origin - Resources Sharing) 보안정책때문에
 // 우리는 back과 front 둘 다 control 가능하기 때문에 proxy를 사용할거임!
 function LandingPage(props) {
     const [Products, setProducts] = useState([]);
-    const [Skip, setSkip] = useState(0); // eslint-disable-line no-unused-vars
+    const [Skip, setSkip] = useState(0);
     const [Limit, setLimit] = useState(8); // eslint-disable-line no-unused-vars
     const [PostSize, setPostSize] = useState(0);
     const [Filters, setFilters] = useState({
@@ -78,13 +79,32 @@ function LandingPage(props) {
         setSkip(0);
     };
 
+    const handlePrice = (value) => {
+        const data = price;
+        let array = [];
+
+        for (let key in data) {
+            if (data[key]._id === parseInt(value, 10)) {
+                array = data[key].array;
+            }
+        }
+
+        return array;
+    };
+
     const handleFilters = (filters, category) => {
         // CheckBox의 id가 filter에 담겨있다.
         const newFilters = { ...Filters };
-
         newFilters[category] = filters;
 
+        if (category === "price") {
+            let priceValues = handlePrice(filters);
+            newFilters[category] = priceValues;
+        }
+        console.log("filters", filters);
+
         showFilterdResults(newFilters);
+        setFilters(newFilters);
     };
 
     return (
@@ -95,14 +115,26 @@ function LandingPage(props) {
                 </h2>
             </div>
             {/* Filter */}
-            {/* CheckBox */}
-            <CheckBox
-                list={categories}
-                handleFilters={(filters) =>
-                    handleFilters(filters, "categories")
-                }
-            />
-            {/* RadioBox */}
+
+            <Row gutter={[16, 16]}>
+                <Col lg={12} xs={24}>
+                    {/* CheckBox */}
+                    <CheckBox
+                        list={categories}
+                        handleFilters={(filters) =>
+                            handleFilters(filters, "categories")
+                        }
+                    />
+                </Col>
+                <Col lg={12} xs={24}>
+                    <RadioBox
+                        list={price}
+                        handleFilters={(filters) =>
+                            handleFilters(filters, "price")
+                        }
+                    />
+                </Col>
+            </Row>
 
             {/* Search */}
 
