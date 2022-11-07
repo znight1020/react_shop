@@ -40,6 +40,20 @@ const productSchema = mongoose.Schema(
     { timestamps: true }
 );
 
+productSchema.index(
+    {
+        title: "text",
+        description: "text",
+    },
+    {
+        weights: {
+            // 중요도
+            title: 5,
+            description: 1,
+        },
+    }
+);
+
 const Product = mongoose.model("Product", productSchema);
 
 module.exports = { Product }; // 다른 곳에서도 쓸 수 있게

@@ -50,6 +50,7 @@ router.post("/products", (req, res) => {
 
     let limit = req.body.limit ? parseInt(req.body.limit) : 20; // parseInt는 req.body.limit이 String일 경우에 대비해
     let skip = req.body.skip ? parseInt(req.body.skip) : 0;
+    let term = req.body.searchTerm;
 
     let findArgs = {};
 
@@ -65,20 +66,36 @@ router.post("/products", (req, res) => {
             }
         } // key는 categories or price가 된다.
     }
-    console.log("findArgs", findArgs);
+    //console.log("findArgs", findArgs);
 
-    Product.find(findArgs) // findArgs가 뭔가? findArgs로 설정된 categories = n,n,n,n만 찾아서 가져와라
-        .populate("writer")
-        .skip(skip)
-        .limit(limit)
-        .exec((err, productInfo) => {
-            if (err) return res.status(400).json({ success: false, err });
-            return res.status(200).json({
-                success: true,
-                productInfo,
-                postSize: productInfo.length,
+    if (term) {
+        Product.find(findArgs) // findArgs가 뭔가? findArgs로 설정된 categories = n,n,n,n만 찾아서 가져와라
+            .find({ title: { $regex: term } }) // mongodb에서 제공해주는 $text, $search
+            .populate("writer")
+            .skip(skip)
+            .limit(limit)
+            .exec((err, productInfo) => {
+                if (err) return res.status(400).json({ success: false, err });
+                return res.status(200).json({
+                    success: true,
+                    productInfo,
+                    postSize: productInfo.length,
+                });
             });
-        });
+    } else {
+        Product.find(findArgs) // findArgs가 뭔가? findArgs로 설정된 categories = n,n,n,n만 찾아서 가져와라
+            .populate("writer")
+            .skip(skip)
+            .limit(limit)
+            .exec((err, productInfo) => {
+                if (err) return res.status(400).json({ success: false, err });
+                return res.status(200).json({
+                    success: true,
+                    productInfo,
+                    postSize: productInfo.length,
+                });
+            });
+    }
 });
 
 module.exports = router;

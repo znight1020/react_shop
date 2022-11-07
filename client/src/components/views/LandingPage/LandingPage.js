@@ -7,6 +7,7 @@ import Meta from "antd/lib/card/Meta";
 import ImageSlider from "../../utils/ImageSlider";
 import RadioBox from "./Sections/RadioBox";
 import CheckBox from "./Sections/CheckBox";
+import SearchFeature from "./Sections/SearchFeature";
 import { categories, price } from "./Sections/Datas";
 
 // 두개의 다른 포트를 가지고 있는 서버는 아무 설정없이 request를 보낼 수 없다. why? Cors(Cross - Origin - Resources Sharing) 보안정책때문에
@@ -20,6 +21,8 @@ function LandingPage(props) {
         categories: [],
         price: [],
     });
+    const [SearchTerm, setSearchTerm] = useState("");
+
     useEffect(() => {
         let body = {
             skip: Skip, // 더보기 버튼을 누를 시 Skip만 달리 해서 다음 상품들을 볼 수 있게 할 수 있다.
@@ -101,15 +104,33 @@ function LandingPage(props) {
             let priceValues = handlePrice(filters);
             newFilters[category] = priceValues;
         }
-        console.log("filters", filters);
+        //console.log("filters", filters);
 
         showFilterdResults(newFilters);
         setFilters(newFilters);
     };
 
+    const updateSearchTerm = (newSearchTerm) => {
+        let body = {
+            skip: 0,
+            limit: Limit,
+            filters: Filters,
+            searchTerm: newSearchTerm,
+        };
+        setSkip(0);
+        setSearchTerm(newSearchTerm);
+        getProducts(body);
+    };
+
     return (
         <div style={{ width: "75%", margin: "3rem auto" }}>
-            <div style={{ textAlign: "center" }}>
+            <div
+                style={{
+                    textAlign: "center",
+                    justifyContent: "flex-end",
+                    margin: "1rem auto",
+                }}
+            >
                 <h2>
                     Let's Buy Whatever <ShopOutlined />
                 </h2>
@@ -137,6 +158,15 @@ function LandingPage(props) {
             </Row>
 
             {/* Search */}
+            <div
+                style={{
+                    display: "flex",
+                    justifyContent: "flex-end",
+                    margin: "1rem auto",
+                }}
+            >
+                <SearchFeature refreshFunction={updateSearchTerm} />
+            </div>
 
             {/* Cards */}
             <Row gutter={[16, 16]}>{renderCards}</Row>
