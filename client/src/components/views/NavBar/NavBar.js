@@ -24,7 +24,7 @@ function NavBar() {
             style={{ position: "fixed", zIndex: 5, width: "100%" }}
         >
             <div className="menu__logo">
-                <a href="/">P&N</a>
+                <a href="/">5조</a>
             </div>
             <div className="menu__container">
                 <div className="menu_left">
