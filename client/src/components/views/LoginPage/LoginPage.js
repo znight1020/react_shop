@@ -6,7 +6,6 @@ import { Formik } from "formik";
 import * as Yup from "yup";
 import { Form, Input, Button, Checkbox, Typography } from "antd";
 import { UserOutlined, LockOutlined } from "@ant-design/icons";
-import "antd/dist/antd.min.css";
 
 const { Title } = Typography;
 

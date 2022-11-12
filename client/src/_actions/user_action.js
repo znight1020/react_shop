@@ -1,10 +1,10 @@
 import axios from "axios";
-import { LOGIN_USER, REGISTER_USER, AUTH_USER } from "./types";
-
+import { LOGIN_USER, REGISTER_USER, AUTH_USER, ADD_TO_CART } from "./types";
+import { USER_SERVER } from "../components/Config";
 // Axios를 통해 post 함수를 서버에 보낸다.
 export function loginUser(dataToSubmit) {
     const request = axios
-        .post("/api/users/login", dataToSubmit)
+        .post(`${USER_SERVER}/login`, dataToSubmit)
         .then((response) => response.data);
 
     return {
@@ -15,7 +15,7 @@ export function loginUser(dataToSubmit) {
 
 export function registerUser(dataToSubmit) {
     const request = axios
-        .post("/api/users/register", dataToSubmit)
+        .post(`${USER_SERVER}/register`, dataToSubmit)
         .then((response) => response.data);
 
     return {
@@ -26,11 +26,25 @@ export function registerUser(dataToSubmit) {
 
 export function auth() {
     const request = axios
-        .get("/api/users/auth")
+        .get(`${USER_SERVER}/auth`)
         .then((response) => response.data);
 
     return {
         type: AUTH_USER,
+        payload: request,
+    };
+}
+
+export function addToCart(id) {
+    let body = {
+        productId: id,
+    };
+    const request = axios
+        .post(`${USER_SERVER}/addTocart`, body)
+        .then((response) => response.data);
+
+    return {
+        type: ADD_TO_CART,
         payload: request,
     };
 }
