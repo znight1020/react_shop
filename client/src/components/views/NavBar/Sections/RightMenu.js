@@ -1,5 +1,5 @@
 import React from "react";
-import { Menu } from "antd";
+import { Menu, Badge, Avatar } from "antd";
 import axios from "axios";
 import { USER_SERVER } from "../../../Config";
 import { useSelector } from "react-redux";
@@ -9,6 +9,7 @@ import {
     UploadOutlined,
     LoginOutlined,
     LogoutOutlined,
+    ShoppingCartOutlined,
 } from "@ant-design/icons";
 import "antd/dist/antd.min.css";
 
@@ -43,12 +44,23 @@ function RightMenu(props) {
     } else {
         return (
             <Menu mode={props.mode}>
+                <Menu.Item key="cart">
+                    <a href="/user/cart">
+                        <Badge count={5}>
+                            <ShoppingCartOutlined
+                                style={{ fontSize: 30, marginTop: 7 }}
+                            />
+                        </Badge>
+                    </a>
+                </Menu.Item>
+
                 <Menu.Item key="upload">
                     <a href="/product/upload">
                         <UploadOutlined />
                         Upload
                     </a>
                 </Menu.Item>
+
                 <Menu.Item key="logout">
                     <a onClick={logoutHandler}>
                         <LogoutOutlined />

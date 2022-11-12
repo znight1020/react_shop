@@ -1,6 +1,6 @@
 .menu {
     display: flex;
-    padding: 0 20px;
+    padding: 0 30px;
     border-bottom: solid 1px #e8e8e8;
     overflow: auto;
     box-shadow: 0 0 30px #f3f1f1;
@@ -21,6 +21,7 @@
 .menu__container {
     width: calc(100% - 150px);
     float: left;
+    margin-top: 0.5%; /*위치*/
 }
 
 .menu__container .ant-menu-item {
