@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import Dropzone from "react-dropzone";
 import { PlusOutlined } from "@ant-design/icons";
 import axios from "axios";
-
+//
 function FileUpload(props) {
     const [Images, setImages] = useState([]);
     const dropHandler = (files) => {

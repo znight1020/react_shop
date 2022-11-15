@@ -4,10 +4,9 @@ const multer = require("multer");
 const prod = require("../config/prod");
 const { Product } = require("../models/Product");
 
-//=================================
+//==================================
 //             Product
-//=================================
-
+//==================================
 const storage = multer.diskStorage({
     destination: function (req, file, cb) {
         // destination 어디에 파일이 저장되는가?
