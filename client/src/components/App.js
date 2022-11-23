@@ -6,10 +6,10 @@ import RegisterPage from "./views/RegisterPage/RegisterPage";
 import UploadProductPage from "./views/UploadProductPage/UploadProductPage";
 import DetailProductPage from "./views/DetailProductPage/DetailProductPage";
 import CartPage from "./views/CartPage/CartPage";
+import ARModelPage from "./views/ARModelPage/ARModelPage";
 import NavBar from "./views/NavBar/NavBar";
 import Footer from "./views/Footer/Footer";
 import "antd/dist/antd.min.css";
-
 import "./styles.css";
 
 import Auth from "../hoc/auth";
@@ -20,6 +20,7 @@ const AuthRegisterPage = Auth(RegisterPage, false);
 const AuthUploadProductPage = Auth(UploadProductPage, true);
 const AuthDetailProductPage = Auth(DetailProductPage, null);
 const AuthCartPage = Auth(CartPage, true);
+const AuthARModelPage = Auth(ARModelPage, null);
 
 function App() {
     return (
@@ -48,6 +49,10 @@ function App() {
                             element={<AuthDetailProductPage />}
                         />
                         <Route path="/user/cart" element={<AuthCartPage />} />
+                        <Route
+                            path="/user/ARModel"
+                            element={<AuthARModelPage />}
+                        />
                     </Routes>
                 </div>
                 <Footer />
