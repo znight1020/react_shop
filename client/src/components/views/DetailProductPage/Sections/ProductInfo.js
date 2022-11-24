@@ -46,15 +46,6 @@ export default function ProductInfo(props) {
                 >
                     Add to Cart
                 </Button>
-                <Button
-                    style={{ marginLeft: "10px" }}
-                    size="large"
-                    shape="round"
-                    type="danger"
-                    onClick={clickHandler}
-                >
-                    Show AR Model
-                </Button>
             </div>
         </div>
     );

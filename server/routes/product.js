@@ -114,7 +114,7 @@ router.get("/products_by_id", (req, res) => {
         .populate("writer")
         .exec((err, product) => {
             if (err) return res.status(400).send(err);
-            return res.status(200).json({ success: true, product }); // front에서 success이기 때문에 {}안에 product를 넣어줌
+            return res.status(200).send(product);
         });
 });
 

@@ -3,7 +3,7 @@ import React from "react";
 import { SmileOutlined } from "@ant-design/icons";
 import "antd/dist/antd.min.css";
 
-function Footer() {
+function Footer(props) {
     return (
         <div
             style={{

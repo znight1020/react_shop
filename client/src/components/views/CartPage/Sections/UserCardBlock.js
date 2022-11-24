@@ -1,5 +1,6 @@
 import React from "react";
 import "./UserCardBlock.css";
+//전달해줄 때도 { } 속에 넣었으니, 받을 때도 { } 속에 넣어줘야 한다.
 function UserCardBlock(props) {
     const renderCartImage = (images) => {
         if (images.length > 0) {
@@ -22,7 +23,9 @@ function UserCardBlock(props) {
                 <td>{product.quantity} EA</td>
                 <td>$ {product.price}</td>
                 <td>
-                    <button>Remove</button>
+                    <button onClick={() => props.removeItem(product._id)}>
+                        Remove
+                    </button>
                 </td>
             </tr>
         ));
