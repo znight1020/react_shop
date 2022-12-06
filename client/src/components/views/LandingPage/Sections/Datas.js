@@ -3,20 +3,17 @@
 const categories = [
     {
         _id: 1,
-        name: "맨투맨",
+        name: "  상의 ",
     },
     {
         _id: 2,
-        name: "청바지",
+        name: "  하의 ",
     },
     {
         _id: 3,
-        name: "트레이닝복",
+        name: "  그 외 ",
     },
-    {
-        _id: 4,
-        name: "아우터",
-    },
+    
 ];
 
 const price = [

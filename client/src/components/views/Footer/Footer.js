@@ -17,7 +17,7 @@ function Footer(props) {
         >
             <p>
                 {" "}
-                Happy Coding <SmileOutlined />
+                프리캡스톤디자인 5조 <SmileOutlined />
             </p>
         </div>
     );
