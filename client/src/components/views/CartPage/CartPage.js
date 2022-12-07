@@ -1,12 +1,13 @@
-
 import React, { useState, useEffect } from "react";
 import { useDispatch } from "react-redux";
 import { getCartItems, removeCartItem} from "../../../_actions/user_action";
 import UserCardBlock from "./Sections/UserCardBlock";
+import { Empty } from 'antd'
 function CartPage(props) {
   const dispatch = useDispatch();
 
   const [Total, setTotal] = useState(0);
+  const [ShowTotal, setShowTotal] = useState(false); // showTotal이 true인 경우에만 Total을 보여주게
 
   useEffect(() => {
     let cartItems = [];
@@ -34,12 +35,15 @@ function CartPage(props) {
     });
 
     setTotal(total);
+    setShowTotal(true);
   };
 
   let removeFromCart = (productId) => {
 
     dispatch(removeCartItem(productId)).then(response => {
-
+      if (response.payload.productInfo.length <= 0) {
+        setShowTotal(false)
+      }
     })
     
   }
@@ -51,11 +55,20 @@ function CartPage(props) {
         <UserCardBlock products={props.user && props.user.cartDetail} removeItem={removeFromCart} />
       </div>
 
-      <div style={{ marginTop: "3rem" }}>
+      {ShowTotal ?
+        <div style={{ marginTop: "3rem" }}>
         <h2> Total Amount: ₩{Total}</h2>
-      </div>
+        </div>
+        :
+        <>
+          <br />
+          <Empty description={false} />
+        </>
+      }
+
+      
     </div>
-  );
+  )
 }
 
 export default CartPage;
