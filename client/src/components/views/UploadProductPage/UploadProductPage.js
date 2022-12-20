@@ -7,10 +7,9 @@ import { useNavigate } from "react-router-dom";
 const { TextArea } = Input;
 
 const Categories = [
-    { Key: 1, value: "맨투맨" },
-    { Key: 2, value: "청바지" },
-    { Key: 3, value: "트레이닝복" },
-    { Key: 4, value: "아우터" },
+    { Key: 1, value: "상의 " },
+    { Key: 2, value: "하의 " },
+    { Key: 3, value: "이너 " },
 ];
 
 function UploadProductPage(props) {

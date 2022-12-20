@@ -7,6 +7,11 @@ const cookieParser = require("cookie-parser");
 const config = require("./config/key");
 const mongoose = require("mongoose");
 
+// const corsOptions = {
+//     origin: 'http://localhost:3000',
+//     credentials: true,
+// }
+
 mongoose
     .connect(config.mongoURI, {
         useNewUrlParser: true,
@@ -16,7 +21,7 @@ mongoose
     .catch((err) => console.log(err));
 
 app.use(cors());
-
+// app.use(cors(corsOptions))
 //application/x-www-form-urlencoded
 app.use(bodyParser.urlencoded({ extended: true }));
 //application/json

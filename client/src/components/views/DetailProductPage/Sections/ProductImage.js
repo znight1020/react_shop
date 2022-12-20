@@ -9,8 +9,10 @@ export default function ProductImage(props) {
 
             props.detail.images.map((item) => {
                 images.push({
-                    original: `http://localhost:5000/${item}`,
-                    thumbnail: `http://localhost:5000/${item}`,
+                    //original: `http://localhost:5000/${item}`,
+                    //thumbnail: `http://localhost:5000/${item}`,
+                    original: `http://192.168.0.122:5000/${item}`,
+                    thumbnail: `http://192.168.0.122:5000/${item}`,
                 });
             });
             setImages(images);

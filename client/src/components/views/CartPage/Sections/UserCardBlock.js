@@ -5,7 +5,8 @@ function UserCardBlock(props) {
     const renderCartImage = (images) => {
         if (images.length > 0) {
             let image = images[0];
-            return `http://localhost:5000/${image}`;
+            //return `http://localhost:5000/${image}`;
+            return `http://192.168.0.122:5000/${image}`
         }
     };
 

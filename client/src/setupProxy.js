@@ -4,6 +4,7 @@ module.exports = function (app) {
     app.use(
         "/api",
         createProxyMiddleware({
+            //target: "192.168.0.122:5000",
             target: "http://localhost:5000", // 3000번 front에서 target을 5000번으로 설정하겠다.
             changeOrigin: true,
         })

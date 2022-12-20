@@ -60,6 +60,7 @@ function LandingPage(props) {
   };
 
   const renderCards = Products.map((product, index) => {
+    
     return (
       // 가로 너비 기준 lg : 데스크탑 , md : 노트북 ,  sm : 태블릿 , xs : 모바일
       <Col lg={6} md={8} xs={24} key={index}>
@@ -71,7 +72,7 @@ function LandingPage(props) {
             </a>
           }
         >
-          <Meta title={product.title} description={`${product.price}`} />
+          <Meta title={product.title} description={`${product.price.toLocaleString() + "원"}`} />
         </Card>
       </Col>
     );

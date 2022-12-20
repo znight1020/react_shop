@@ -46,7 +46,7 @@ function RightMenu(props) {
             <Menu mode={props.mode}>
                 <Menu.Item key="cart">
                     <a href="/user/cart">
-                        <Badge count={5}>
+                        <Badge count={0}>
                             <ShoppingCartOutlined
                                 style={{ fontSize: 30, marginTop: 7 }}
                             />

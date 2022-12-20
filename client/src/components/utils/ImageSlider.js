@@ -8,7 +8,8 @@ function ImageSlider(props) {
                     <div key={index}>
                         <img
                             style={{ width: "100%", maxHeight: "150px" }}
-                            src={`http://localhost:5000/${image}`}
+                            src={`http://192.168.0.122:5000/${image}`}
+                            //src={`192.168.0.122:5000/${image}`}
                             alt="slide"
                         />
                     </div>
