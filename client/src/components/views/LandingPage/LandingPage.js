@@ -139,6 +139,8 @@ function LandingPage(props) {
       >
         <h2>
           Let's Buy Whatever <ShopOutlined />
+        <br/>
+        <a href="//drive.google.com/file/d/1CX-JW5OqepEvRb91YIc3reS08kxUmtz1/view?usp=sharing">&nbsp;&nbsp;&nbsp;APK 다운</a> 
         </h2>
       </div>
       {/* Filter */}
